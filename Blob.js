@@ -16,16 +16,16 @@
 
 (function(global) {
 (function (factory) {
-  if (typeof define === "function" && define.amd) {
-    // AMD. Register as an anonymous module.
-    define(["exports"], factory);
-  } else if (typeof exports === "object" && typeof exports.nodeName !== "string") {
-    // CommonJS
-    factory(exports);
-  } else {
-    // Browser globals
-    factory(global);
-  }
+	if (typeof define === "function" && define.amd) {
+		// AMD. Register as an anonymous module.
+		define(["exports"], factory);
+	} else if (typeof exports === "object" && typeof exports.nodeName !== "string") {
+		// CommonJS
+		factory(exports);
+	} else {
+		// Browser globals
+		factory(global);
+	}
 })(function (exports) {
 	"use strict";
 
@@ -42,7 +42,7 @@
 	// in order to support older browsers that only have BlobBuilder
 	var BlobBuilder = global.BlobBuilder || global.WebKitBlobBuilder || global.MozBlobBuilder || (function() {
 		var
-				get_class = function(object) {
+			  get_class = function(object) {
 				return Object.prototype.toString.call(object).match(/^\[object\s(.*)\]$/)[1];
 			}
 			, FakeBlobBuilder = function BlobBuilder() {
@@ -61,7 +61,7 @@
 				this.code = this[this.name = type];
 			}
 			, file_ex_codes = (
-					"NOT_FOUND_ERR SECURITY_ERR ABORT_ERR NOT_READABLE_ERR ENCODING_ERR "
+				  "NOT_FOUND_ERR SECURITY_ERR ABORT_ERR NOT_READABLE_ERR ENCODING_ERR "
 				+ "NO_MODIFICATION_ALLOWED_ERR INVALID_STATE_ERR SYNTAX_ERR"
 			).split(" ")
 			, file_ex_code = file_ex_codes.length
@@ -85,7 +85,7 @@
 		if (!real_URL.createObjectURL) {
 			URL = exports.URL = function(uri) {
 				var
-						uri_info = document.createElementNS("http://www.w3.org/1999/xhtml", "a")
+					  uri_info = document.createElementNS("http://www.w3.org/1999/xhtml", "a")
 					, uri_origin
 				;
 				uri_info.href = uri;
@@ -102,7 +102,7 @@
 		}
 		URL.createObjectURL = function(blob) {
 			var
-					type = blob.type
+				  type = blob.type
 				, data_URI_header
 			;
 			if (type === null) {
@@ -133,7 +133,7 @@
 			// decode data to a binary string
 			if (Uint8Array && (data instanceof ArrayBuffer || data instanceof Uint8Array)) {
 				var
-						str = ""
+					  str = ""
 					, buf = new Uint8Array(data)
 					, i = 0
 					, buf_len = buf.length
@@ -181,7 +181,7 @@
 				type = null;
 			}
 			return new FakeBlob(
-					this.data.slice(start, args > 1 ? end : this.data.length)
+				  this.data.slice(start, args > 1 ? end : this.data.length)
 				, type
 				, this.encoding
 			);
