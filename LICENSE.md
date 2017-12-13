@@ -1,3 +1,5 @@
+MIT License
+
 Copyright &copy; 2014 [Eli Grey][1].
 
 Permission is hereby granted, free of charge, to any person
