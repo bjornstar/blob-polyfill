@@ -1,8 +1,26 @@
-Blob.js
+Blob Polyfill
 ==============
+
+[![npm](https://img.shields.io/npm/v/blob-polyfill.svg)](https://www.npmjs.com/package/blob-polyfill)
+[![npm](https://img.shields.io/npm/dm/blob-polyfill.svg)](https://www.npmjs.com/package/blob-polyfill)
+
+## Purpose
 
 Blob.js implements the W3C [`Blob`][1] interface in browsers that do
 not natively support it.
+
+## Changelog
+
+[Please read the changelog](CHANGELOG.md)
+
+## Installation
+
+To install this library, run:
+
+```bash
+$ npm install blob-polyfill --save
+```
+
 
 Supported browsers
 ------------------
