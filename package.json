@@ -1,10 +1,11 @@
 {
   "name": "blob-polyfill",
-  "version": "2.0.20171115",
+  "version": "3.0.20180112",
   "description": "Blob.js implements the W3C Blob interface in browsers that do not natively support it.",
   "main": "Blob.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint": "eslint Blob.js test",
+    "test": "mocha test"
   },
   "repository": {
     "type": "git",
@@ -19,5 +20,9 @@
   "bugs": {
     "url": "https://github.com/bjornstar/blob-polyfill/issues"
   },
-  "homepage": "https://github.com/bjornstar/blob-polyfill"
+  "homepage": "https://github.com/bjornstar/blob-polyfill",
+  "devDependencies": {
+    "eslint": "^5.1.0",
+    "mocha": "^5.2.0"
+  }
 }
