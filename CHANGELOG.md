@@ -1,5 +1,10 @@
 # `blob-polyfill` CHANGELOG
 
+## v4.0.20190430
+* A complete rewrite of Blob.js (@jimmywarting)
+* Restore the UMD wrapper (@bjornstar)
+* Add some tests for File, FileReader, and URL (@bjornstar)
+
 ## v3.0.20180112
 * Resolve conflict from upstream based on date version change (@bjornstar)
 * Remove `this.content` to match upstream changes (@bjornstar)
