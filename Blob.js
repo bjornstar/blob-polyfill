@@ -582,9 +582,9 @@
 		}
 
 		if (strTag) {
-			exports.File.prototype[strTag] = "File";
-			exports.Blob.prototype[strTag] = "Blob";
-			exports.FileReader.prototype[strTag] = "FileReader";
+			global.File.prototype[strTag] = "File";
+			global.Blob.prototype[strTag] = "Blob";
+			global.FileReader.prototype[strTag] = "FileReader";
 		}
 
 		var blob = exports.Blob.prototype;
