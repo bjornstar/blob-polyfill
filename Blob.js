@@ -582,9 +582,9 @@
 		}
 
 		if (strTag) {
-			exports.File.prototype[strTag] = "File";
-			exports.Blob.prototype[strTag] = "Blob";
-			exports.FileReader.prototype[strTag] = "FileReader";
+			if (!exports.File.prototype[strTag]) exports.File.prototype[strTag] = "File";
+			if (!exports.Blob.prototype[strTag]) exports.Blob.prototype[strTag] = "Blob";
+			if (!exports.FileReader.prototype[strTag]) exports.FileReader.prototype[strTag] = "FileReader";
 		}
 
 		var blob = exports.Blob.prototype;

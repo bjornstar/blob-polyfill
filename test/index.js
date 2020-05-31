@@ -35,6 +35,10 @@ describe("blob-polyfill", function () {
 			assert.strictEqual(blob.size, 3);
 			assert.strictEqual(blob.type, "application/octet-binary");
 		});
+
+		it("Symbol is Blob", function () {
+			assert.strictEqual(Blob.prototype[Symbol.toStringTag], "Blob");
+		});
 	});
 
 	describe("File", function () {
@@ -52,6 +56,10 @@ describe("blob-polyfill", function () {
 			assert.strictEqual(file.type, "");
 			assert.strictEqual(file.name, "");
 		});
+
+		it("Symbol is File", function () {
+			assert.strictEqual(File.prototype[Symbol.toStringTag], "File");
+		});
 	});
 
 	describe("FileReader", function () {
@@ -67,6 +75,10 @@ describe("blob-polyfill", function () {
 			var fileReader = new FileReader();
 
 			assert.ok(fileReader);
+		});
+
+		it("Symbol is FileReader", function () {
+			assert.strictEqual(FileReader.prototype[Symbol.toStringTag], "FileReader");
 		});
 	});
 
