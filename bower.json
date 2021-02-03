@@ -1,6 +1,6 @@
 {
   "name": "blob-polyfill",
-  "version": "4.0.20190430",
+  "version": "5.0.20210201",
   "homepage": "https://github.com/bjornstar/blob-polyfill",
   "authors": [
     "Eli Grey <me@eligrey.com>"

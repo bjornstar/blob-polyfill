@@ -1,6 +1,6 @@
 {
   "name": "blob-polyfill",
-  "version": "4.0.20200601",
+  "version": "5.0.20210201",
   "description": "Blob.js implements the W3C Blob interface in browsers that do not natively support it.",
   "main": "Blob.js",
   "scripts": {
@@ -15,14 +15,15 @@
     "blob",
     "polyfill"
   ],
-  "author": "Eli Grey <me@eligrey.com> (http://eligrey.com)",
+  "author": "Eli Grey <me@eligrey.com> (https://eligrey.com)",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/bjornstar/blob-polyfill/issues"
   },
   "homepage": "https://github.com/bjornstar/blob-polyfill",
   "devDependencies": {
-    "eslint": "^7.1.0",
-    "mocha": "^7.2.0"
+    "@sindresorhus/is": "^4.0.0",
+    "eslint": "^7.19.0",
+    "mocha": "^8.2.1"
   }
 }

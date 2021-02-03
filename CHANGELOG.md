@@ -1,5 +1,11 @@
 # `blob-polyfill` CHANGELOG
 
+## v5.0.20210201
+* [Blob.js] Blob.arrayBuffer() should return a promise that resolves with an ArrayBuffer (@bjornstar)
+* [test] Add a test for Blob.arrayBuffer (@bjornstar)
+* [package.json] Update devDependencies: `eslint` & `mocha` (@bjornstar)
+* [package.json] Add devDependency: `@sindresorhus/is` (@bjornstar)
+
 ## v4.0.20200601
 * [Blob.js] Populate File and FileReader in exports after confirming File is supported (@bjornstar)
 

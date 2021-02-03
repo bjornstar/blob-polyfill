@@ -1,8 +1,8 @@
 /* Blob.js
  * A Blob, File, FileReader & URL implementation.
- * 2019-04-30
+ * 2020-02-01
  *
- * By Eli Grey, http://eligrey.com
+ * By Eli Grey, https://eligrey.com
  * By Jimmy Wärting, https://github.com/jimmywarting
  * License: MIT
  *   See https://github.com/eligrey/Blob.js/blob/master/LICENSE.md
@@ -375,7 +375,7 @@
 			}
 
 			Blob.prototype.arrayBuffer = function () {
-				return Promise.resolve(this._buffer);
+				return Promise.resolve(this._buffer.buffer || this._buffer);
 			};
 
 			Blob.prototype.text = function () {

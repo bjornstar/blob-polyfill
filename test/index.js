@@ -1,4 +1,6 @@
 var assert = require("assert");
+var is = require("@sindresorhus/is");
+
 var BlobPolyfill = require("../Blob.js");
 
 var Blob = BlobPolyfill.Blob;
@@ -38,6 +40,16 @@ describe("blob-polyfill", function () {
 
 		it("Symbol is Blob", function () {
 			assert.strictEqual(Blob.prototype[Symbol.toStringTag], "Blob");
+		});
+
+		it("Blob.arrayBuffer() returns a promise that resolves with an ArrayBuffer", function () {
+			var blob = new Blob();
+
+			is.assert.promise(blob.arrayBuffer());
+
+			return blob.arrayBuffer().then(function (value) {
+				is.assert.arrayBuffer(value);
+			});
 		});
 	});
 
