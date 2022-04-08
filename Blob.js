@@ -355,7 +355,7 @@
 			/*                   Blob constructor                   */
 			/********************************************************/
 			function Blob (chunks, opts) {
-				chunks = chunks || [];
+				chunks = chunks ? chunks.slice() : [];
 				opts = opts == null ? {} : opts;
 				for (var i = 0, len = chunks.length; i < len; i++) {
 					var chunk = chunks[i];

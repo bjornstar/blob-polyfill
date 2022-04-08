@@ -1,5 +1,12 @@
 # `blob-polyfill` CHANGELOG
 
+## v7.0.20220408
+* [Blob.js] Do not modify array that is passed into constructor (@zyrong)
+* [.github] Start automated tests on github (@bjornstar)
+* [.travis.yml] Remove travis-ci integration (@bjornstar)
+* [.npmignore] Ignore .github, remove .travis.yml (@bjornstar)
+* [devDependencies] Update test dependencies (@bjornstar)
+
 ## v6.0.20211015
 * [Blob.js] Check object class names when determining Object types (@coclauso)
 * [Blob.js] Reduce redundancies in getting class names and prototype checks (@bjornstar)

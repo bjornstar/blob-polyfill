@@ -61,6 +61,13 @@ describe("blob-polyfill", function () {
 				assert.strictEqual(testString, testStringRecovered);
 			});
 		});
+
+		it("Does not modify the source array", function () {
+			var array = ['mutation'];
+			var clone = array.slice();
+			var blob = new Blob(array);
+			assert.deepStrictEqual(array, clone);
+		});
 	});
 
 	describe("File", function () {
