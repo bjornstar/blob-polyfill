@@ -11,10 +11,16 @@ var URL = BlobPolyfill.URL;
 describe("blob-polyfill", function () {
 	describe("Blob", function () {
 		it("Does not pollute the global Blob definition", function () {
-			assert.strictEqual(typeof global.Blob, "undefined");
-			assert.throws(function () {
-				new global.Blob();
-			}, TypeError, "global.Blob should not be a constructor");
+			if (typeof global.Blob === "function") {
+				assert(Blob === global.Blob);
+				assert.strictEqual(Blob.isPolyfill, undefined);
+			} else {
+				assert.strictEqual(typeof global.Blob, "undefined");
+				assert.throws(function () {
+					new global.Blob();
+				}, TypeError, "global.Blob should not be a constructor");
+				assert.strictEqual(Blob.isPolyfill, true);
+			}
 		});
 
 		it("At the very least, we can instantiate an empty Blob", function () {
@@ -63,19 +69,24 @@ describe("blob-polyfill", function () {
 		});
 
 		it("Does not modify the source array", function () {
-			var array = ['mutation'];
+			var array = ["mutation"];
 			var clone = array.slice();
-			var blob = new Blob(array);
+			new Blob(array);
 			assert.deepStrictEqual(array, clone);
 		});
 	});
 
 	describe("File", function () {
 		it("Does not pollute the global File definition", function () {
-			assert.strictEqual(typeof global.File, "undefined");
-			assert.throws(function () {
-				new global.File();
-			}, TypeError, "global.File should be undefined");
+			if (typeof global.File === "function") {
+				assert.strictEqual(File, global.File);
+				assert.strictEqual(File.isPolyfill, undefined);
+			} else {
+				assert.strictEqual(typeof global.File, "undefined");
+				assert.throws(function () {
+					new global.File();
+				}, TypeError, "global.File should be undefined");
+			}
 		});
 
 		it("We can instantiate a File", function () {
@@ -86,8 +97,8 @@ describe("blob-polyfill", function () {
 			assert.strictEqual(file.name, "");
 		});
 
-		it("Symbol is File", function () {
-			assert.strictEqual(File.prototype[Symbol.toStringTag], "File");
+		it("Symbol is File or Blob", function () {
+			assert.ok(["Blob", "File"].includes(File.prototype[Symbol.toStringTag]));
 		});
 	});
 
@@ -112,14 +123,29 @@ describe("blob-polyfill", function () {
 	});
 
 	describe("URL", function () {
-		it.skip("Does not pollute the global URL definition", function () {
+		it("Modifies the global URL to always create Blobs if Blobs are not native", function () {
 			assert.strictEqual(typeof global.URL, "function");
-			assert.notStrictEqual(URL, global.URL);
+			assert.strictEqual(URL, global.URL);
+			if (typeof global.Blob === "function") {
+				assert.strictEqual(global.URL.createObjectURL.isPolyfill, undefined);
+				assert.strictEqual(global.URL.revokeObjectURL.isPolyfill, undefined);
+			} else {
+				assert.strictEqual(typeof global.URL, "function");
+				assert.strictEqual(URL, global.URL);
+				assert.strictEqual(global.URL.createObjectURL.isPolyfill, true);
+				assert.strictEqual(global.URL.revokeObjectURL.isPolyfill, true);
+			}
 		});
 		it("We can call URL.createObjectUrl", function () {
-			var url = URL.createObjectURL(new File(["hello world"], "hello.txt", { type: "application/plain-text" }));
-			assert.strictEqual(typeof url, "string");
-			assert.strictEqual(url, "data:application/plain-text;base64,aGVsbG8gd29ybGQ=");
+			if (typeof global.Blob !== "function") {
+				var polyfilledUrl = URL.createObjectURL(new File(["hello world"], "hello.txt", { type: "application/plain-text" }));
+				assert.strictEqual(typeof polyfilledUrl, "string");
+				assert.strictEqual(polyfilledUrl, "data:application/plain-text;base64,aGVsbG8gd29ybGQ=");
+			} else {
+				var nodeUrl = URL.createObjectURL(new File(["hello world"], "hello.txt", { type: "application/plain-text" }));
+				assert.strictEqual(typeof nodeUrl, "string");
+				assert.match(nodeUrl, /blob:nodedata:[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}/);
+			}
 		});
 	});
 });

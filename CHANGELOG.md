@@ -1,5 +1,12 @@
 # `blob-polyfill` CHANGELOG
 
+## v8.0.20240630
+* [Blob.js] Change Blob.prototype to global.Blob.prototype (@tmisirpash)
+* [Blob.js] Make it work in environments where global.Blob exists, but global.FileReader does not (@bjornstar)
+* [Blob.js] Add `isPolyfill` property to the polyfilled versions so we can differentiate them (@bjornstar)
+* [test] Unskip tests and update to work in environments with global.Blob & global.File & global.URL (@bjornstar)
+* [.github] Update action versions and test node v12-v22 (@bjornstar)
+
 ## v7.0.20220408
 * [Blob.js] Do not modify array that is passed into constructor (@zyrong)
 * [.github] Start automated tests on github (@bjornstar)
