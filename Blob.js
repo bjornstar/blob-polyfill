@@ -93,8 +93,8 @@
 		}
 
 		if (global.Blob) {
-			BlobBuilderConstructor.prototype = Blob.prototype;
-			BlobConstructor.prototype = Blob.prototype;
+			BlobBuilderConstructor.prototype = global.Blob.prototype;
+			BlobConstructor.prototype = global.Blob.prototype;
 		}
 
 		/********************************************************/
