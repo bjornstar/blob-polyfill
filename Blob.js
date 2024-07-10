@@ -687,7 +687,7 @@ function array2base64 (input) {
 
 		if (!blob.arrayBuffer) {
 			blob.arrayBuffer = function arrayBuffer() {
-				var fr = new FileReader();
+				var fr = new exports.FileReader();
 				fr.readAsArrayBuffer(this);
 				return promisify(fr);
 			};
@@ -695,7 +695,7 @@ function array2base64 (input) {
 
 		if (!blob.text) {
 			blob.text = function text() {
-				var fr = new FileReader();
+				var fr = new exports.FileReader();
 				fr.readAsText(this);
 				return promisify(fr);
 			};
