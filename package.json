@@ -4,7 +4,7 @@
   "description": "Blob.js implements the W3C Blob interface in browsers that do not natively support it.",
   "main": "Blob.js",
   "scripts": {
-    "lint": "eslint Blob.js test",
+    "lint": "eslint .",
     "test": "mocha test"
   },
   "repository": {
@@ -22,7 +22,7 @@
   },
   "homepage": "https://github.com/bjornstar/blob-polyfill",
   "devDependencies": {
-    "@sindresorhus/is": "^4.6.0",
+    "@sindresorhus/is": "^7.0.0",
     "eslint": "^9.6.0",
     "mocha": "^10.6.0"
   }
