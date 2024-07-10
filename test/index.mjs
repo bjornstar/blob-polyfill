@@ -1,55 +1,55 @@
-var assert = require("assert");
-var is = require("@sindresorhus/is");
+import assert from "node:assert/strict";
+import * as is from "@sindresorhus/is";
 
-var BlobPolyfill = require("../Blob.js");
+import BlobPolyfill from "../Blob.js";
 
-var Blob = BlobPolyfill.Blob;
-var File = BlobPolyfill.File;
-var FileReader = BlobPolyfill.FileReader;
-var URL = BlobPolyfill.URL;
+const Blob = BlobPolyfill.Blob;
+const File = BlobPolyfill.File;
+const FileReader = BlobPolyfill.FileReader;
+const URL = BlobPolyfill.URL;
 
-describe("blob-polyfill", function () {
-	describe("Blob", function () {
-		it("Does not pollute the global Blob definition", function () {
+describe("blob-polyfill", () => {
+	describe("Blob", () => {
+		it("Does not pollute the global Blob definition", () => {
 			if (typeof global.Blob === "function") {
 				assert(Blob === global.Blob);
 				assert.strictEqual(Blob.isPolyfill, undefined);
 			} else {
 				assert.strictEqual(typeof global.Blob, "undefined");
-				assert.throws(function () {
+				assert.throws(() => {
 					new global.Blob();
 				}, TypeError, "global.Blob should not be a constructor");
 				assert.strictEqual(Blob.isPolyfill, true);
 			}
 		});
 
-		it("At the very least, we can instantiate an empty Blob", function () {
-			var blob = new Blob();
+		it("At the very least, we can instantiate an empty Blob", () => {
+			const blob = new Blob();
 
 			assert.strictEqual(blob.size, 0);
 			assert.strictEqual(blob.type, "");
 		});
 
-		it("We can instantiate a json Blob", function () {
-			var example = { hello: "world" };
-			var blob = new Blob([JSON.stringify(example, null, 2)], { type : "application/json" });
+		it("We can instantiate a json Blob", () => {
+			const example = { hello: "world" };
+			const blob = new Blob([JSON.stringify(example, null, 2)], { type : "application/json" });
 
 			assert.strictEqual(blob.size, 22);
 			assert.strictEqual(blob.type, "application/json");
 		});
 
-		it("We can instantiate a binary Blob", function () {
-			var blob = new Blob([ new Uint8Array([1, 2, 3]) ], { type: "application/octet-binary" });
+		it("We can instantiate a binary Blob", () => {
+			const blob = new Blob([ new Uint8Array([1, 2, 3]) ], { type: "application/octet-binary" });
 			assert.strictEqual(blob.size, 3);
 			assert.strictEqual(blob.type, "application/octet-binary");
 		});
 
-		it("Symbol is Blob", function () {
+		it("Symbol is Blob", () => {
 			assert.strictEqual(Blob.prototype[Symbol.toStringTag], "Blob");
 		});
 
-		it("Blob.arrayBuffer() returns a promise that resolves with an ArrayBuffer", function () {
-			var blob = new Blob();
+		it("Blob.arrayBuffer() returns a promise that resolves with an ArrayBuffer", () => {
+			const blob = new Blob();
 
 			is.assert.promise(blob.arrayBuffer());
 
@@ -58,72 +58,72 @@ describe("blob-polyfill", function () {
 			});
 		});
 
-		it("Blob can be instantiated with ArrayBuffer, data can be recovered", function () {
-			var testString = "Testing...";
-			var arrayBuffer = stringToArrayBuffer(testString);
-			var blob = new Blob([arrayBuffer]);
+		it("Blob can be instantiated with ArrayBuffer, data can be recovered", () => {
+			const testString = "Testing...";
+			const arrayBuffer = stringToArrayBuffer(testString);
+			const blob = new Blob([arrayBuffer]);
 			return blob.arrayBuffer().then(function (value) {
-				var testStringRecovered = arrayBufferToString(value);
+				const testStringRecovered = arrayBufferToString(value);
 				assert.strictEqual(testString, testStringRecovered);
 			});
 		});
 
-		it("Does not modify the source array", function () {
-			var array = ["mutation"];
-			var clone = array.slice();
+		it("Does not modify the source array", () => {
+			const array = ["mutation"];
+			const clone = array.slice();
 			new Blob(array);
 			assert.deepStrictEqual(array, clone);
 		});
 	});
 
-	describe("File", function () {
-		it("Does not pollute the global File definition", function () {
+	describe("File", () => {
+		it("Does not pollute the global File definition", () => {
 			if (typeof global.File === "function") {
 				assert.strictEqual(File, global.File);
 				assert.strictEqual(File.isPolyfill, undefined);
 			} else {
 				assert.strictEqual(typeof global.File, "undefined");
-				assert.throws(function () {
+				assert.throws(() => {
 					new global.File();
 				}, TypeError, "global.File should be undefined");
 			}
 		});
 
-		it("We can instantiate a File", function () {
-			var file = new File([], "");
+		it("We can instantiate a File", () => {
+			const file = new File([], "");
 
 			assert.strictEqual(file.size, 0);
 			assert.strictEqual(file.type, "");
 			assert.strictEqual(file.name, "");
 		});
 
-		it("Symbol is File or Blob", function () {
+		it("Symbol is File or Blob", () => {
 			assert.ok(["Blob", "File"].includes(File.prototype[Symbol.toStringTag]));
 		});
 	});
 
-	describe("FileReader", function () {
-		it("Does not pollute the global FileReader definition", function () {
+	describe("FileReader", () => {
+		it("Does not pollute the global FileReader definition", () => {
 			assert.strictEqual(typeof global.FileReader, "undefined");
-			assert.throws(function () {
+			assert.throws(() => {
 				new global.FileReader();
 			}, TypeError, "global.FileReader should be undefined");
 		});
 
 		// As it stands, the FileReader does not work in node.
-		it.skip("We can instantiate a FileReader", function () {
-			var fileReader = new FileReader();
+		it.skip("We can instantiate a FileReader", () => {
+			const fileReader = new FileReader();
 
 			assert.ok(fileReader);
 		});
 
-		it("Symbol is FileReader", function () {
+		it("Symbol is FileReader", () => {
 			assert.strictEqual(FileReader.prototype[Symbol.toStringTag], "FileReader");
 		});
 	});
 
-	describe("URL", function () {
-		it("Modifies the global URL to always create Blobs if Blobs are not native", function () {
+	describe("URL", () => {
+		it("Modifies the global URL to always create Blobs if Blobs are not native", () => {
 			assert.strictEqual(typeof global.URL, "function");
 			assert.strictEqual(URL, global.URL);
 			if (typeof global.Blob === "function") {
@@ -136,13 +136,13 @@ describe("blob-polyfill", function () {
 				assert.strictEqual(global.URL.revokeObjectURL.isPolyfill, true);
 			}
 		});
-		it("We can call URL.createObjectUrl", function () {
+		it("We can call URL.createObjectUrl", () => {
 			if (typeof global.Blob !== "function") {
-				var polyfilledUrl = URL.createObjectURL(new File(["hello world"], "hello.txt", { type: "application/plain-text" }));
+				const polyfilledUrl = URL.createObjectURL(new File(["hello world"], "hello.txt", { type: "application/plain-text" }));
 				assert.strictEqual(typeof polyfilledUrl, "string");
 				assert.strictEqual(polyfilledUrl, "data:application/plain-text;base64,aGVsbG8gd29ybGQ=");
 			} else {
-				var nodeUrl = URL.createObjectURL(new File(["hello world"], "hello.txt", { type: "application/plain-text" }));
+				const nodeUrl = URL.createObjectURL(new File(["hello world"], "hello.txt", { type: "application/plain-text" }));
 				assert.strictEqual(typeof nodeUrl, "string");
 				assert.match(nodeUrl, /blob:nodedata:[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}/);
 			}
@@ -152,15 +152,15 @@ describe("blob-polyfill", function () {
 
 
 function stringToArrayBuffer(string) {
-	var buf = new ArrayBuffer(string.length * 2); // 2 bytes for each char
-	var bufView = new Uint16Array(buf);
-	for (var i = 0; i < string.length; i+= 1) {
+	const buf = new ArrayBuffer(string.length * 2); // 2 bytes for each char
+	const bufView = new Uint16Array(buf);
+	for (let i = 0; i < string.length; i+= 1) {
 		bufView[i] = string.charCodeAt(i);
 	}
 	return buf;
 }
 
 function arrayBufferToString(buffer) {
-	var array = new Uint16Array(buffer);
+	const array = new Uint16Array(buffer);
 	return String.fromCharCode.apply(null, array);
 }

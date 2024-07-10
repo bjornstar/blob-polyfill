@@ -2,12 +2,13 @@
 
 [![npm](https://img.shields.io/npm/v/blob-polyfill.svg)](https://www.npmjs.com/package/blob-polyfill)
 [![npm](https://img.shields.io/npm/dm/blob-polyfill.svg)](https://www.npmjs.com/package/blob-polyfill)
+[![build status](https://github.com/bjornstar/blob-polyfill/actions/workflows/node.js.yml/badge.svg?branch=master)](https://github.com/bjornstar/blob-polyfill/actions/workflows/node.js.yml?query=branch%3Amaster)
 
 ## Purpose
 
 Blob Polyfill serves [Blob.js][0] over npm.
- 
-Blob.js implements the W3C [`Blob`][1] interface in browsers that do not natively support it. 
+
+Blob.js implements the W3C [`Blob`][1] interface in browsers that do not natively support it.
 
 ## Changelog
 

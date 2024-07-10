@@ -1,5 +1,13 @@
 # `blob-polyfill` CHANGELOG
 
+## v9.0.20240710
+* [Blob.js] Use exported FileReader (@luke-stead-sonocent)
+* [test] Test is now a module (@bjornstar)
+* [README.md] Add badge for `master` branch build status  (@bjornstar)
+* [package.json] Update devDependencies: `@sindresorhus/is`, `eslint`, & `mocha` (@bjornstar)
+* [bower.json] Match current version (@bjornstar)
+* [.eslintrc.js] Change to `eslint.config.mjs` for eslint@9 (@bjornstar)
+
 ## v8.0.20240630
 * [Blob.js] Change Blob.prototype to global.Blob.prototype (@tmisirpash)
 * [Blob.js] Make it work in environments where global.Blob exists, but global.FileReader does not (@bjornstar)

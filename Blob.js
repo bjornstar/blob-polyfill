@@ -85,8 +85,7 @@ function array2base64 (input) {
 			// Check if Blob constructor supports ArrayBufferViews
 			// Fails in Safari 6, so we need to map to ArrayBuffers there.
 			blobSupportsArrayBufferView = new Blob([new Uint8Array([1, 2])]).size === 2;
-		} catch (e) {/**/}
-
+		} catch (e) {/* eslint-disable-line no-unused-vars */}
 
 		// Helper function that maps ArrayBufferViews to ArrayBuffers
 		// Used by BlobBuilder constructor and old browsers that didn't
@@ -426,7 +425,7 @@ function array2base64 (input) {
 			} else {
 				try {
 					File.__proto__ = Blob;
-				} catch (e) {/**/}
+				} catch (e) {/* eslint-disable-line no-unused-vars */}
 			}
 
 			File.prototype.toString = function () {
@@ -492,7 +491,7 @@ function array2base64 (input) {
 			try {
 				new File([], "");
 				exports.File = global.File;
-			} catch (e) {
+			} catch (e) { // eslint-disable-line no-unused-vars
 				try {
 					exports.File = new Function("class File extends Blob {" +
 						"constructor(chunks, name, opts) {" +
@@ -504,7 +503,7 @@ function array2base64 (input) {
 						"}};" +
 						"return new File([], \"\"), File"
 					)();
-				} catch (e) {
+				} catch (e) { // eslint-disable-line no-unused-vars
 					exports.File = function File(b, d, c) {
 						var blob = new Blob(b, c);
 						var t = c && void 0 !== c.lastModified ? new Date(c.lastModified) : new Date();
@@ -638,7 +637,7 @@ function array2base64 (input) {
 					}
 				});
 			};
-		} catch (e) {
+		} catch (e) { // eslint-disable-line no-unused-vars
 			try {
 				new ReadableStream({});
 				stream = function stream(blob){
@@ -659,13 +658,13 @@ function array2base64 (input) {
 						}
 					});
 				};
-			} catch (e) {
+			} catch (e) { // eslint-disable-line no-unused-vars
 				try {
 					new Response("").body.getReader().read();
 					stream = function stream() {
 						return (new Response(this)).body;
 					};
-				} catch (e) {
+				} catch (e) { // eslint-disable-line no-unused-vars
 					stream = function stream() {
 						throw new Error("Include https://github.com/MattiasBuelens/web-streams-polyfill");
 					};
